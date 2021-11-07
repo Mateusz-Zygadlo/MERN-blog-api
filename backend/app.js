@@ -10,17 +10,10 @@ mongoose.connect(mongoDb, { useUnifiedTopology: true, useNewUrlParser: true });
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "mongo connection error"));
 
+const indexRoutes = require('./routes/index');
+
 const app = express();
 
-app.use('/home', (req, res) => {
-  res.json({
-    title: 'Welcome to blog api'
-  })
-})
-app.use('/posts', (req, res) => {
-  res.json({
-    title: 'All posts'
-  })
-})
+app.use('/', indexRoutes);
 
 app.listen(port, () => console.log('api work'));
