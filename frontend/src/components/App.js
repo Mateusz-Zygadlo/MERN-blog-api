@@ -2,9 +2,6 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const App = () => {
-  const [loading, setLoading] = useState(true);
-  const [result, setResult] = useState(null);
-
   useEffect(() => {
     const url = 'http://localhost:8000/posts';
     const fetchPosts = async () => {
@@ -17,13 +14,7 @@ const App = () => {
   }, [])
 
   return(
-    <div>
-      {loading ? 
-        <div>Loading</div>
-      :
-        <div>{result}</div>
-      }
-    </div>
+    <div>MERN blog api</div>
   )
 }
 
