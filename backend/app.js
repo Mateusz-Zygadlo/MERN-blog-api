@@ -1,5 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors');
+const bodyParser = require('body-parser');
 
 require('dotenv').config()
 
@@ -13,6 +15,10 @@ db.on("error", console.error.bind(console, "mongo connection error"));
 const indexRoutes = require('./routes/index');
 
 const app = express();
+
+app.use(bodyParser.json({ limit: '30mb', extended: true }))
+app.use(cors());
+app.use(express.json());
 
 app.use('/', indexRoutes);
 
