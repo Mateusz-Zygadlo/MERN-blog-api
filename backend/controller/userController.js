@@ -51,3 +51,9 @@ exports.newUser = [
     })
   }
 ]
+
+exports.loginUser = [
+  (req, res, next) => {
+    
+  }
+]

@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes ,Route } from 'react-router-dom';
 import { Login } from './pages/Login';
 import { Register } from './pages/Register';
+import { App } from './components/App';
 
 export const Router = () => {
   return(
@@ -15,6 +16,11 @@ export const Router = () => {
           exact 
           path='/register'
           element={<Register />}
+        />
+        <Route
+          exact
+          path='/' 
+          element={<App />}
         />
         </Routes>
     </BrowserRouter>
