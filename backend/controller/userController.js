@@ -53,7 +53,33 @@ exports.newUser = [
 ]
 
 exports.loginUser = [
-  (req, res, next) => {
-    
+  async (req, res, next) => {
+    const {email, password} = req.body;
+    const user = await User.findOne({email: email});
+
+    if(!email || email == null){
+      return res.json({
+        title: 'error',
+        err: 'User not found',
+      })
+    }
+    try{
+      if(await bcrypt.compare(password, user.password)){
+        return res.json({
+          title: 'success',
+          user,
+        })
+      }else{
+        return res.json({
+          title: 'error',
+          err: 'Password is incorrect',
+        })
+      }
+    }catch(err){
+      return res.json({
+        title: 'error',
+        err,
+      })
+    }
   }
 ]

@@ -38,13 +38,6 @@ export const Register = () => {
 
   const createNewUser = async (e) => {
     e.preventDefault();
-
-    setUser({
-      email: '',
-      password: '',
-      passwordTwo: '',
-      authorPermissions: false,
-    })
     
     const {email, password, passwordTwo} = user;
 

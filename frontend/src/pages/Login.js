@@ -19,18 +19,22 @@ export const Login = () => {
 
   const loginUser = async (e) => {
     e.preventDefault();
-
-    setUser({
-      email: '',
-      password: '',
-    })
     
     const {email, password} = user;
 
     if(password && email){
       await axios.post('http://localhost:8000/login', user)
-        .then((res) => setResponseData(res));
+        .then((res) => {
+          console.log(res.data);
+          
+          return setResponseData(res);
+        })
     }
+
+    setUser({
+      email: '',
+      password: '',
+    })
   }
 
   return(
