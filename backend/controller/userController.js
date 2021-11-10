@@ -1,5 +1,10 @@
+require('dotenv').config();
+
 const User = require('../model/user');
+
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+
 
 exports.allUsers = (req, res, next) => {
   User.find().exec((err, result) => {
@@ -57,7 +62,7 @@ exports.loginUser = [
     const {email, password} = req.body;
     const user = await User.findOne({email: email});
 
-    if(!email || email == null){
+    if(!email){
       return res.json({
         title: 'error',
         err: 'User not found',
@@ -65,9 +70,21 @@ exports.loginUser = [
     }
     try{
       if(await bcrypt.compare(password, user.password)){
+        const userObj = {
+          _id: user.id,
+          email: user.email,
+          password: user.password,
+          author: user.author,
+          user: user.user,
+          isAdmin: user.isAdmin,
+        }
+        const accessToken = jwt.sign(userObj, process.env.SECRET_KEY);
+        const refreshToken = jwt.sign(userObj, process.env.REFRESH_TOKEN)
+
         return res.json({
           title: 'success',
-          user,
+          accessToken,
+          refreshToken,
         })
       }else{
         return res.json({
