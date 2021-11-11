@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes ,Route } from 'react-router-dom';
 import { Login } from './pages/Login';
 import { Register } from './pages/Register';
-import { App } from './components/App';
+import { Home } from './pages/Home';
 
 export const Router = () => {
   return(
@@ -20,9 +20,13 @@ export const Router = () => {
         <Route
           exact
           path='/' 
-          element={<App />}
+          element={<Home />}
         />
-        </Routes>
+        <Route
+          exact
+          path='/posts'
+        />
+      </Routes>
     </BrowserRouter>
   )
 }
