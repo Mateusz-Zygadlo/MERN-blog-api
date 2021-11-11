@@ -6,7 +6,7 @@ exports.allPosts = (req, res, next) => {
       return next(err);
     }
 
-    res.json({
+    return res.json({
       posts: result
     })
   })

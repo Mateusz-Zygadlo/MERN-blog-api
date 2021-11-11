@@ -5,7 +5,7 @@ const userController = require('../controller/userController');
 const postController = require('../controller/postController');
 const commentController = require('../controller/commentController');
 
-
+router.get('/', userController.homePage)
 router.post('/register', userController.newUser);
 router.post('/login', userController.loginUser);
 

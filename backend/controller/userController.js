@@ -5,7 +5,6 @@ const User = require('../model/user');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-
 exports.allUsers = (req, res, next) => {
   User.find().exec((err, result) => {
     if(err){
@@ -79,13 +78,18 @@ exports.loginUser = [
           isAdmin: user.isAdmin,
         }
         const accessToken = jwt.sign(userObj, process.env.SECRET_KEY);
-        const refreshToken = jwt.sign(userObj, process.env.REFRESH_TOKEN)
 
-        return res.json({
-          title: 'success',
-          accessToken,
-          refreshToken,
-        })
+        return res
+          .status(202)
+          .cookie('JWT-TOKEN', accessToken, {
+            sameSite: 'strict', 
+            path: '/', 
+            expires: new Date(new Date().getTime() + 30 * 1000),
+            secure: true,
+          })
+          .json({
+            title: 'success',
+          })
       }else{
         return res.json({
           title: 'error',
@@ -94,9 +98,61 @@ exports.loginUser = [
       }
     }catch(err){
       return res.json({
-        title: 'error',
-        err,
+        error: 'error'
       })
     }
   }
 ]
+
+exports.homePage = (req, res, next) => {
+  let cookie = req.cookies['JWT-REFRESH-TOKEN'];
+
+  if(!req.cookies['JWT-REFRESH-TOKEN'] && !req.cookies['JWT-TOKEN']){
+    return res.json({
+      error: 'Not created token'
+    })
+  }
+
+  if(!cookie){
+    jwt.verify(req.cookies['JWT-TOKEN'], process.env.SECRET_KEY, (err, user) => {
+      if(err){
+        return res.status(403).json({
+          title: 'Invalid refresh token',
+        })
+      }
+      const userObj = {
+        _id: user.id,
+        email: user.email,
+        password: user.password,
+        author: user.author,
+        user: user.user,
+        isAdmin: user.isAdmin,
+      }
+
+      const refreshToken = jwt.sign(userObj, process.env.REFRESH_TOKEN_KEY);
+  
+      return res
+        .cookie('JWT-REFRESH-TOKEN', refreshToken, {
+          sameSite: 'strict', 
+          path: '/', 
+          expires: new Date(new Date().getTime() + 1000000 * 1000),
+          secure: true,
+        })
+        .json({
+          user
+        })
+      })
+  }else{
+    jwt.verify(cookie, process.env.REFRESH_TOKEN_KEY, (err, user) => {
+      if(err){
+        return res.status(403).json({
+          title: 'Invalid refresh token',
+        })
+      }
+  
+      return res.json({
+        user
+      })
+    })
+  }
+}

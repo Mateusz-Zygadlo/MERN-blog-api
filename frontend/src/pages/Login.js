@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 export const Login = () => {
@@ -7,6 +8,15 @@ export const Login = () => {
     password: '',
   })
   const [responseData, setResponseData] = useState(null);
+  const history = useNavigate();
+
+  useEffect(() => {
+    if(responseData !== null){
+      if(responseData.data.title == "success"){
+        return history('/');
+      }
+    }
+  }, [responseData])
 
   const handleChange = (e) => {
     const {name,value} = e.target
@@ -24,11 +34,7 @@ export const Login = () => {
 
     if(password && email){
       await axios.post('http://localhost:8000/login', user)
-        .then((res) => {
-          console.log(res.data);
-          
-          return setResponseData(res);
-        })
+        .then((res) => setResponseData(res))
     }
 
     setUser({
