@@ -7,11 +7,14 @@
     @apply mr-3 text-xl border-b-2 border-white transition-colors hover:navLinkHover focus:navLinkFocus active:navLinkHover;
   }
   .mobileNavLink{
-    @apply flex justify-center mb-5 text-xl border-b-2 border-blue-300 transition-colors hover:navLinkHover focus:navLinkFocus active:navLinkHover;
+    @apply flex justify-center mb-5 text-xl w-auto border-transparent border-b-2 transition-colors hover:mobileNavLinkHover focus:navLinkFocus active:mobileNavLinkHover;
   }
   @variants hover, focus, active {
+    .mobileNavLinkHover{
+      @apply border-b-2 hover:border-white;
+    }
     .navLinkHover{
-      @apply border-b-2 hover:border-gray-200;
+      @apply border-b-2 hover:border-gray-200
     }
     .navLinkFocus{
       @apply focus:border-blue-300;

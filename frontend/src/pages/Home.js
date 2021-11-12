@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Navbar } from '../components/Navbar';
 import { Banner } from '../components/Banner';
+import { LatestPosts } from '../components/LatestPosts';
 
 axios.defaults.withCredentials = true;
 
@@ -21,9 +22,10 @@ export const Home = () => {
   return(
     <>
       {responseData ?
-        <div className="w-11/12 mx-auto max-w-screen-2">
+        <div className="w-11/12 mx-auto max-w-screen-2xl 2xl:mx-auto">
           <Navbar responseData={responseData} />
           <Banner />
+          <LatestPosts />
         </div>
       : 
         <div>Loading</div>

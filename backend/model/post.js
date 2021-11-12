@@ -6,13 +6,23 @@ const PostSchema = new Schema({
     type: 'string',
     require: true,
     minLength: 1,
-    maxLength: 50,
+    maxLength: 30,
   },
   description: {
     type: 'string',
     require: true,
     minLength: 1,
-    maxLength: 500,
+    maxLength: 2500,
+  },
+  postAbbreviation: {
+    type: 'string',
+    require: true,
+    minLength: 1,
+    maxLength: 60,
+  },
+  date: {
+    type: 'string',
+    require: true,
   },
   author: {
     type: Schema.Types.ObjectId,

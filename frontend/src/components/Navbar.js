@@ -22,7 +22,7 @@ export const Navbar = ({ responseData }) => {
 
   return(
     <div className="w-full h-20 border-b-2 flex justify-between items-center">
-      <Link to='/'><h1 className="text-4xl">Blog name</h1></Link>
+      <Link to='/'><h1 className="text-4xl">Platform name</h1></Link>
         {!(mobileWidth < 870) ? 
           <ul className="flex pt-3">
             {responseData.user ? 
@@ -48,28 +48,31 @@ export const Navbar = ({ responseData }) => {
                 menu
               </span>
             : 
-              <div className="fixed top-0 right-0 w-96 h-screen bg-blue-300">
-                <span className="material-icons w-full p-5 cursor-pointer flex justify-end" onClick={()=>{setClose(false)}}>
-                  close
-                </span>
-                <ul className="pt-3 flex justify-center flex-col">
-                  {responseData.user ? 
-                    <>
-                      <li className="mobileNavLink"><Link to='/posts'>All posts</Link></li>
-                      <li className="mobileNavLink"><Link to="/">My posts</Link></li>
-                      <li className="mobileNavLink"><Link to="/">Created post</Link></li>
-                      <li className="mobileNavLink"><Link to="/logout">Logout</Link></li>
-                    </>
-                  : 
-                    <>
-                      <li className="mobileNavLink"><Link to="/posts">All posts</Link></li>
-                      <li className="mobileNavLink"><Link to="/login">Login</Link></li>
-                      <li className="mobileNavLink"><Link to="/register">Register</Link></li>
-                    </>
-                  }
-                  
-                </ul>  
-              </div>
+              <>
+                <div className="fixed w-full h-full top-0 left-0 z-10 backdrop-filter backdrop-blur-sm"></div>
+                <div className="fixed top-0 right-0 w-96 h-screen flex z-20 backdrop-filter backdrop-blur-lg border-l-2 border-black">
+                    <span className="material-icons cursor-pointer absolute top-8 right-12" onClick={()=>{setClose(false)}}>
+                      close
+                    </span>
+                    <ul className="pt-3 flex flex-col mt-20 mx-auto">
+                      {responseData.user ? 
+                        <>
+                          <li className="mobileNavLink"><Link to='/posts'>All posts</Link></li>
+                          <li className="mobileNavLink"><Link to="/">My posts</Link></li>
+                          <li className="mobileNavLink"><Link to="/">Created post</Link></li>
+                          <li className="mobileNavLink"><Link to="/logout">Logout</Link></li>
+                        </>
+                      : 
+                        <>
+                          <li className="mobileNavLink"><Link to="/posts">All posts</Link></li>
+                          <li className="mobileNavLink"><Link to="/login">Login</Link></li>
+                          <li className="mobileNavLink"><Link to="/register">Register</Link></li>
+                        </>
+                      }
+                      
+                    </ul>  
+                  </div>
+              </>
             }
           </>
         }
