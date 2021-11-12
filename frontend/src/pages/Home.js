@@ -22,7 +22,7 @@ export const Home = () => {
     <>
       {responseData ?
         <div className="w-11/12 mx-auto max-w-screen-2">
-          <Navbar responseData={responseData.user} />
+          <Navbar responseData={responseData} />
           <Banner />
         </div>
       : 

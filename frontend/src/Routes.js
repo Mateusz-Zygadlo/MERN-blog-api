@@ -22,10 +22,6 @@ export const Router = () => {
           path='/' 
           element={<Home />}
         />
-        <Route
-          exact
-          path='/posts'
-        />
       </Routes>
     </BrowserRouter>
   )
