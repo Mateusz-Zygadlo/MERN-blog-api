@@ -104,6 +104,20 @@ exports.loginUser = [
   }
 ]
 
+exports.logoutUser = (req, res, next) => {
+  return res
+    .status(200)
+    .clearCookie('JWT-TOKEN', {
+      path: '/'
+    })
+    .clearCookie('JWT-REFRESH-TOKEN', {
+      path: '/',
+    })
+    .json({
+      title: 'success logout'
+    })
+}
+
 exports.homePage = (req, res, next) => {
   let cookie = req.cookies['JWT-REFRESH-TOKEN'];
 

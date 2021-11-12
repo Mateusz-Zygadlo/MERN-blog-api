@@ -8,7 +8,21 @@ export const Login = () => {
     password: '',
   })
   const [responseData, setResponseData] = useState(null);
+  const [isLogin, setLogin] = useState(null);
   const history = useNavigate();
+
+  useEffect(() => {
+    const getUser = async () => {
+      await axios.get('http://localhost:8000/').then((res) => setLogin(res.data))
+    }
+    getUser();
+
+    if(isLogin){
+      if(isLogin.user){
+        return history('/');
+      }
+    }
+  })
 
   useEffect(() => {
     if(responseData !== null){

@@ -8,6 +8,7 @@ const commentController = require('../controller/commentController');
 router.get('/', userController.homePage)
 router.post('/register', userController.newUser);
 router.post('/login', userController.loginUser);
+router.get('/logout', userController.logoutUser);
 
 router.get('/users', userController.allUsers);
 

@@ -24,7 +24,7 @@ export const Home = () => {
       {responseData ?
         <div className="w-11/12 mx-auto max-w-screen-2xl 2xl:mx-auto">
           <Navbar responseData={responseData} />
-          <Banner />
+          <Banner responseData={responseData} />
           <LatestPosts />
         </div>
       : 
