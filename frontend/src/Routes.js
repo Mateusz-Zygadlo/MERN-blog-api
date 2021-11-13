@@ -9,6 +9,7 @@ import { CreatePost  } from './pages/CreatePost';
 import { AllPosts } from './pages/AllPosts';
 import { MyPosts } from './pages/MyPosts';
 import { Navbar } from './components/Navbar';
+import { Post } from './pages/Post';
 
 axios.defaults.withCredentials = true;
 
@@ -17,8 +18,6 @@ export const Router = () => {
   const [latestPosts, setLatestPosts] = useState(null);
 
   useEffect(() => {
-    console.log(true);
-
     if(document.cookies){
       return;
     }
@@ -74,6 +73,11 @@ export const Router = () => {
           exact
           path='/myPosts'
           element={<MyPosts />}
+        />
+        <Route 
+          exact
+          path='/post/:id'
+          element={<Post responseData={responseData} />}
         />
       </Routes>
     </BrowserRouter>

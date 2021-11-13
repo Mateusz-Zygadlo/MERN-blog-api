@@ -8,10 +8,14 @@ const CommentSchema = new Schema({
     minLength: 1,
     maxLength: 500,
   },
-  author: {
-    type: Schema.Types.ObjectId,
+  authorEmail: {
+    type: 'string',
     ref: 'User',
   },
+  post: {
+    type: Schema.Types.ObjectId,
+    ref: 'Post'
+  }
 })
 
 module.exports = CommentSchema;

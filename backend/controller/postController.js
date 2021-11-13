@@ -16,6 +16,18 @@ exports.allPosts = (req, res, next) => {
   })
 }
 
+exports.allPostsFromAdmin = (req, res, next) => {
+  Post.find().exec((err, result) => {
+    if(err){
+      return next(err);
+    }
+
+    return res.json({
+      posts: result
+    })
+  })
+}
+
 exports.latestPosts = (req, res, next) => {
   Post.find({isPublic: true}).sort({_id: -1}).limit(6).exec((err, result) => {
     if(err){
@@ -105,3 +117,54 @@ exports.myPosts = (req, res, next) => {
     })
   })
 }
+
+exports.deletePost = [
+  async (req, res, next) => {
+    const { id } = req.params;
+
+    if(req.body.isPublicTest == ''){
+      Post.findOne({_id: id}).exec((err, result) => {
+        if(err){
+          return next(err);
+        }
+
+        Post.updateOne({_id: id}, {isPublic: !result.isPublic}).exec((err, resultTwo) => {
+          if(err){
+            return next(err);
+          }
+
+          return res.json({
+            title: 'success',
+          })
+        })
+      })
+
+      return;
+    }
+
+    Post.findOneAndRemove({_id: id}).exec((err, result) => {
+      if(err){
+        return next(err);
+      }
+
+      return res.json({
+        title: 'success deleted post',
+        result,
+      });
+    })
+  }
+]
+
+exports.viewPost = [
+  (req, res, next) => {
+    Post.findOne({_id: req.params.id}).exec((err, result) => {
+      if(err){
+        return next(err);
+      }
+
+      return res.json({
+        result,
+      })
+    })
+  }
+]

@@ -1,6 +1,8 @@
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
-export const PostAbbreviation = ({ title, isPublic, postAbbreviation, author, date, responseData, id, allPostsFunc, deleteButton, setData }) => {  
+export const PostAbbreviation = ({ title, isPublic, postAbbreviation, author, date, responseData, id, allPostsFunc, deleteButton, setData }) => { 
+  const history = useNavigate(); 
   const deletePost = async (e) => {
     e.preventDefault();
 
@@ -15,10 +17,13 @@ export const PostAbbreviation = ({ title, isPublic, postAbbreviation, author, da
         }
     })
   }
+  const viewPost = () => {
+    return history(`/post/${id}`)
+  }
 
   return(
-    <div className='p-2 border-2 hover:border-gray-300 transition-colors cursor-pointer flex flex-col justify-between'>
-      <h1 className='text-3xl break-words pb-2 border-b-2'>{title}</h1>
+    <div className='p-2 border-2 hover:border-gray-300 transition-colors flex flex-col justify-between'>
+      <h1 onClick={viewPost} className='text-3xl break-words hover:border-gray-300 cursor-pointer pb-2 border-b-2'>{title}</h1>
       <p className='text-md break-words h-full'>{postAbbreviation}</p>
       <div className='flex justify-between px-10 mt-3 border-t-2'>
         <h2>{author}</h2>
