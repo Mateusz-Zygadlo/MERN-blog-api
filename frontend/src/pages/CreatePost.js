@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { Navbar } from '../components/Navbar';
 
-export const CreatePost = ({ responseData, setLatestPostsFunc }) => {
+export const CreatePost = ({  setLatestPostsFunc }) => {
   const [newPost, setPost] = useState({
     title: '',
     description: '',
@@ -80,7 +79,6 @@ export const CreatePost = ({ responseData, setLatestPostsFunc }) => {
 
   return(
     <div className="w-11/12 mx-auto max-w-screen-2xl 2xl:mx-auto">
-      <Navbar responseData={responseData} />
       <div className="p-10">
         <h1 className="text-5xl py-5">Created Post</h1>
         <form action="http://localhost:8000/newPost" method="POST">

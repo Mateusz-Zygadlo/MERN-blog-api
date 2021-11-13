@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { Navbar } from '../components/Navbar';
 import { LatestPosts } from '../components/LatestPosts';
 
-export const MyPosts = ({ responseData }) => {
+export const MyPosts = () => {
   const [posts, setPosts] = useState(null);
   const history = useNavigate();
 
@@ -35,8 +34,7 @@ export const MyPosts = ({ responseData }) => {
         <div>Loading</div>
       :
         <div className="w-11/12 mx-auto max-w-screen-2xl 2xl:mx-auto">
-          <Navbar responseData={responseData} />
-          <LatestPosts latestPosts={posts} allPosts="true" myPosts="true" />
+          <LatestPosts latestPosts={posts} allPosts="true" myPosts="true" deleteButton="true" setData={setData} />
         </div>
       }
     </>
