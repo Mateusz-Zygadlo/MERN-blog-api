@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export const Navbar = ({ responseData }) => {
   const [close, setClose] = useState(false);
-  const [mobileWidth, setMobileWidth] = useState(1000);
+  const [mobileWidth, setMobileWidth] = useState(600);
 
   useEffect(() => {
     const resizeFunc = () => {
@@ -28,7 +28,7 @@ export const Navbar = ({ responseData }) => {
             {responseData && responseData.user && (responseData.user.isAdmin || responseData.user.author) ? 
               <>
                 <li className="navLink"><Link to='/posts'>All posts</Link></li>
-                <li className="navLink"><Link to="/">My posts</Link></li>
+                <li className="navLink"><Link to="/myPosts">My posts</Link></li>
                 <li className="navLink"><Link to="/newPost">Create post</Link></li>
                 <li className="navLink"><Link to="/logout">Logout</Link></li>
               </>
@@ -63,7 +63,7 @@ export const Navbar = ({ responseData }) => {
                       {responseData.user && (responseData.user.isAdmin || responseData.user.author) ? 
                         <>
                           <li className="mobileNavLink"><Link to='/posts'>All posts</Link></li>
-                          <li className="mobileNavLink"><Link to="/">My posts</Link></li>
+                          <li className="mobileNavLink"><Link to="/myPosts">My posts</Link></li>
                           <li className="mobileNavLink"><Link to="/newPost">Create post</Link></li>
                           <li className="mobileNavLink"><Link to="/logout">Logout</Link></li>
                         </>

@@ -7,6 +7,7 @@ import { Home } from './pages/Home';
 import { Logout } from './pages/Logout';
 import { CreatePost  } from './pages/CreatePost';
 import { AllPosts } from './pages/AllPosts';
+import { MyPosts } from './pages/MyPosts';
 
 axios.defaults.withCredentials = true;
 
@@ -64,6 +65,11 @@ export const Router = () => {
           exact
           path='/posts'
           element={<AllPosts responseData={responseData} />}
+        />
+        <Route 
+          exact
+          path='/myPosts'
+          element={<MyPosts responseData={responseData} />}
         />
       </Routes>
     </BrowserRouter>

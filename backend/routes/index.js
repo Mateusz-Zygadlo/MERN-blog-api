@@ -12,6 +12,7 @@ router.get('/logout', userController.logoutUser);
 router.get('/latestPosts', postController.latestPosts);
 
 router.post('/newPost', postController.newPost);
+router.get('/myPosts', postController.myPosts);
 
 router.get('/users', userController.allUsers);
 

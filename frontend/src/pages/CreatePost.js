@@ -9,23 +9,23 @@ export const CreatePost = ({ responseData, setLatestPostsFunc }) => {
     description: '',
     postAbbreviation: '',
   })
-  const [isLogin, setIsLogin] = useState(null);
   const history = useNavigate();
 
   const isLoginFunc = async () => {
     await axios.get('http://localhost:8000/')
-      .then((res) => setIsLogin(res.data))
+      .then((res) => {
+        if(res.data){
+          if(res.data.error || !res.data.user.author){
+            return history('/');
+          }
+        }
+      })
   }
 
   useEffect(() => {
     isLoginFunc();
+  }, [])
 
-    if(isLogin){
-      if(isLogin.error || !isLogin.user.author){
-        return history('/');
-      }
-    }
-  })
 
   const handleChange = (e) => {
     const {name,value} = e.target;

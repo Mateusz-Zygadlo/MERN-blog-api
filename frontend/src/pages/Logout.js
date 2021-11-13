@@ -4,22 +4,24 @@ import axios from 'axios';
 
 axios.defaults.withCredentials = true;
 
-export const Logout = ({responseDataFunc }) => {
+export const Logout = ({ responseDataFunc }) => {
   const [responseData, setResponseData] = useState(null);
   const history = useNavigate();
 
   const getUser = async () => {
-    await axios.get('http://localhost:8000/logout').then((res) => setResponseData(res.data))
+    await axios.get('http://localhost:8000/logout').then((res) => {
+      setResponseData(res.data);
+
+      if(responseData){
+        responseDataFunc(responseData);
+
+        return history('/');
+      }
+    })
   }
 
   useEffect(() => {
     getUser();
-
-    if(responseData){
-      responseDataFunc(responseData);
-
-      return history('/');
-    }
   })
 
   return(
