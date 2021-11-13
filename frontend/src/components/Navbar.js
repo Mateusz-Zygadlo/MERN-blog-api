@@ -29,7 +29,7 @@ export const Navbar = ({ responseData }) => {
               <>
                 <li className="navLink"><Link to='/posts'>All posts</Link></li>
                 <li className="navLink"><Link to="/">My posts</Link></li>
-                <li className="navLink"><Link to="/newPost">Created post</Link></li>
+                <li className="navLink"><Link to="/newPost">Create post</Link></li>
                 <li className="navLink"><Link to="/logout">Logout</Link></li>
               </>
             : responseData && responseData.user && responseData.user ? 
@@ -64,7 +64,7 @@ export const Navbar = ({ responseData }) => {
                         <>
                           <li className="mobileNavLink"><Link to='/posts'>All posts</Link></li>
                           <li className="mobileNavLink"><Link to="/">My posts</Link></li>
-                          <li className="mobileNavLink"><Link to="/newPost">Created post</Link></li>
+                          <li className="mobileNavLink"><Link to="/newPost">Create post</Link></li>
                           <li className="mobileNavLink"><Link to="/logout">Logout</Link></li>
                         </>
                       : responseData.user && responseData.user ? 

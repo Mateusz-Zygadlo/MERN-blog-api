@@ -1,11 +1,11 @@
 import { PostAbbreviation } from './PostAbbreviation';
 
-export const LatestPosts = ({latestPosts}) => {
+export const LatestPosts = ({latestPosts, allPosts}) => {
   return(
     <>
       {latestPosts && latestPosts.posts.length > 0 ?
         <>
-          <h1 className="my-10 border-t-2 text-4xl">Latest post [{latestPosts.posts.length}]</h1>
+          <h1 className={`my-10 ${allPosts ? null : 'border-t-2'} text-4xl`}>{allPosts ? 'All posts' : 'Latest post'} [{latestPosts.posts.length}]</h1>
           <div className="grid grid-cols-1 gap-4 grid-rows-6 xl w-full h-auto md:grid-cols-2 md:grid-rows-3 mb-10 lg:grid-cols-3 lg:grid-rows-2">
             {latestPosts && latestPosts.posts.map((item) => (
               <PostAbbreviation
@@ -20,7 +20,7 @@ export const LatestPosts = ({latestPosts}) => {
         </>
       :
         <>
-          <h1 className="my-10 border-t-2 text-4xl">Latest post [0]</h1>
+          <h1 className="my-10 border-t-2 text-4xl">{allPosts ? 'All posts' : 'Latest post'} [0]</h1>
           <div className="text-2xl">No posts</div>
         </>
       }

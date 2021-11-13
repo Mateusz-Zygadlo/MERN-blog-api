@@ -5,7 +5,7 @@ const dayjs = require('dayjs')
 dayjs().format();
 
 exports.allPosts = (req, res, next) => {
-  Post.find().exec((err, result) => {
+  Post.find({isPublic: true}).exec((err, result) => {
     if(err){
       return next(err);
     }

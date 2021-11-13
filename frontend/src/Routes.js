@@ -5,7 +5,8 @@ import { Login } from './pages/Login';
 import { Register } from './pages/Register';
 import { Home } from './pages/Home';
 import { Logout } from './pages/Logout';
-import { CreatedPost  } from './pages/CreatedPost';
+import { CreatePost  } from './pages/CreatePost';
+import { AllPosts } from './pages/AllPosts';
 
 axios.defaults.withCredentials = true;
 
@@ -27,6 +28,9 @@ export const Router = () => {
   const setLatestPostsFunc = (props) => {
     setLatestPosts(props);
   }
+  const responseDataFunc = (props) => {
+    setResponseData(props);
+  }
 
   return(
     <BrowserRouter>
@@ -34,7 +38,7 @@ export const Router = () => {
         <Route
           exact
           path='/' 
-          element={<Home responseData={responseData} latestPosts={latestPosts} />}
+          element={<Home responseData={responseData} latestPosts={latestPosts} responseDataFunc={responseDataFunc} />}
         />
         <Route 
           exact 
@@ -49,12 +53,17 @@ export const Router = () => {
         <Route 
           exact
           path='/logout'
-          element={<Logout />}
+          element={<Logout responseDataFunc={responseDataFunc} />}
         />
         <Route 
           exact
           path='/newPost'
-          element={<CreatedPost responseData={responseData} setLatestPostsFunc={setLatestPostsFunc} />}
+          element={<CreatePost responseData={responseData} setLatestPostsFunc={setLatestPostsFunc} />}
+        />
+        <Route 
+          exact
+          path='/posts'
+          element={<AllPosts responseData={responseData} />}
         />
       </Routes>
     </BrowserRouter>

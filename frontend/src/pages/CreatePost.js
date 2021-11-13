@@ -1,15 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Navbar } from '../components/Navbar';
 
-export const CreatedPost = ({ responseData, setLatestPostsFunc }) => {
+export const CreatePost = ({ responseData, setLatestPostsFunc }) => {
   const [newPost, setPost] = useState({
     title: '',
     description: '',
     postAbbreviation: '',
   })
+  const [isLogin, setIsLogin] = useState(null);
   const history = useNavigate();
+
+  const isLoginFunc = async () => {
+    await axios.get('http://localhost:8000/')
+      .then((res) => setIsLogin(res.data))
+  }
+
+  useEffect(() => {
+    isLoginFunc();
+
+    if(isLogin){
+      if(isLogin.error || !isLogin.user.author){
+        return history('/');
+      }
+    }
+  })
 
   const handleChange = (e) => {
     const {name,value} = e.target;

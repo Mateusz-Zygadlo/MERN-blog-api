@@ -4,7 +4,7 @@ import axios from 'axios';
 
 axios.defaults.withCredentials = true;
 
-export const Logout = () => {
+export const Logout = ({responseDataFunc }) => {
   const [responseData, setResponseData] = useState(null);
   const history = useNavigate();
 
@@ -16,6 +16,8 @@ export const Logout = () => {
     getUser();
 
     if(responseData){
+      responseDataFunc(responseData);
+
       return history('/');
     }
   })
