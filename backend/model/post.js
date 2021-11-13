@@ -6,7 +6,7 @@ const PostSchema = new Schema({
     type: 'string',
     require: true,
     minLength: 1,
-    maxLength: 30,
+    maxLength: 60,
   },
   description: {
     type: 'string',
@@ -18,15 +18,23 @@ const PostSchema = new Schema({
     type: 'string',
     require: true,
     minLength: 1,
-    maxLength: 60,
+    maxLength: 120,
   },
   date: {
     type: 'string',
     require: true,
   },
+  isPublic: {
+    type: 'boolean',
+    require: true,
+  },
   author: {
     type: Schema.Types.ObjectId,
     ref: 'User',
+  },
+  authorEmail: {
+    type: 'string',
+    require: true,
   },
   comments: [{
     type: Schema.Types.ObjectId,

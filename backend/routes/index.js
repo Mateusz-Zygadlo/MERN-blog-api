@@ -9,6 +9,9 @@ router.get('/', userController.homePage)
 router.post('/register', userController.newUser);
 router.post('/login', userController.loginUser);
 router.get('/logout', userController.logoutUser);
+router.get('/latestPosts', postController.latestPosts);
+
+router.post('/newPost', postController.newPost);
 
 router.get('/users', userController.allUsers);
 

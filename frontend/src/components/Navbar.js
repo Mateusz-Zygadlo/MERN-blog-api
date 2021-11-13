@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export const Navbar = ({ responseData }) => {
   const [close, setClose] = useState(false);
-  const [mobileWidth, setMobileWidth] = useState(600);
+  const [mobileWidth, setMobileWidth] = useState(1000);
 
   useEffect(() => {
     const resizeFunc = () => {
@@ -25,14 +25,14 @@ export const Navbar = ({ responseData }) => {
       <Link to='/'><h1 className="text-4xl">Platform name</h1></Link>
         {!(mobileWidth < 870) ? 
           <ul className="flex pt-3">
-            {responseData.user && (responseData.user.isAdmin || responseData.user.author) ? 
+            {responseData && responseData.user && (responseData.user.isAdmin || responseData.user.author) ? 
               <>
                 <li className="navLink"><Link to='/posts'>All posts</Link></li>
                 <li className="navLink"><Link to="/">My posts</Link></li>
-                <li className="navLink"><Link to="/">Created post</Link></li>
+                <li className="navLink"><Link to="/newPost">Created post</Link></li>
                 <li className="navLink"><Link to="/logout">Logout</Link></li>
               </>
-            : responseData.user && responseData.user ? 
+            : responseData && responseData.user && responseData.user ? 
                 <>
                   <li className="navLink"><Link to='/posts'>All posts</Link></li>
                   <li className="navLink"><Link to="/logout">Logout</Link></li>
@@ -64,7 +64,7 @@ export const Navbar = ({ responseData }) => {
                         <>
                           <li className="mobileNavLink"><Link to='/posts'>All posts</Link></li>
                           <li className="mobileNavLink"><Link to="/">My posts</Link></li>
-                          <li className="mobileNavLink"><Link to="/">Created post</Link></li>
+                          <li className="mobileNavLink"><Link to="/newPost">Created post</Link></li>
                           <li className="mobileNavLink"><Link to="/logout">Logout</Link></li>
                         </>
                       : responseData.user && responseData.user ? 
